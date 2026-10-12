@@ -1,7 +1,7 @@
-﻿pipeline {
+pipeline {
     agent any
     environment {
-        AWS_ACCOUNT_ID     = '123456789012' 
+        AWS_ACCOUNT_ID     = '883425316424' 
         AWS_DEFAULT_REGION = 'ap-south-1'
         IMAGE_REPO_NAME    = 'online-exam-repo'
         IMAGE_TAG          = "\${env.BUILD_NUMBER}"
