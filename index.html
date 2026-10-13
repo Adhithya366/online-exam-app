@@ -25,7 +25,7 @@
         <h1>Online Exam Portal</h1>
         <div id="exam-area">
             <div class="question-box">
-                <div id="question" class="question-text">Loading question...</div>
+                <div id="question" class="question-text">Loading question from AWS...</div>
                 <div id="choices"></div>
             </div>
             <button id="submit-btn" onclick="submitAnswer()">Submit Answer</button>
@@ -34,12 +34,13 @@
     </div>
 
     <script>
-        let currentQuestionId = "";
+        let currentQuestionId = "1";
+        // 🔴 ABSOLUTE BACKEND API WEB LINK MAPPING
+        const API_BASE = "http://amazonaws.com";
 
-        // Fetch question data dynamically from the backend container API endpoints
         async function fetchQuestion() {
             try {
-                const response = await fetch('/api/exam');
+                const response = await fetch(`${API_BASE}/api/exam`);
                 const data = await response.json();
                 if (data && data.length > 0) {
                     const q = data[0];
@@ -57,12 +58,11 @@
                     document.getElementById('choices').innerHTML = choicesHtml;
                 }
             } catch (err) {
-                document.getElementById('question').innerText = "Failed to load exam data.";
+                document.getElementById('question').innerText = "Failed to load exam questions from cloud infrastructure.";
                 console.error(err);
             }
         }
 
-        // Post the chosen radio button text answer to the backend evaluation script engine
         async function submitAnswer() {
             const selected = document.querySelector('input[name="exam-choice"]:checked');
             const resultBox = document.getElementById('result-box');
@@ -75,7 +75,7 @@
             }
 
             try {
-                const response = await fetch('/api/exam/submit', {
+                const response = await fetch(`${API_BASE}/api/exam/submit`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ id: currentQuestionId, user_answer: selected.value })
@@ -98,7 +98,6 @@
             }
         }
 
-        // Auto-run question fetch immediately upon document mounting initialization
         window.onload = fetchQuestion;
     </script>
 </body>
