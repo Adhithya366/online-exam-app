@@ -36,8 +36,8 @@
     <script>
         let currentQuestionId = "1";
         
-        // 🔴 CRITICAL ROUTING MAPPING: Connects straight to your real public AWS Fargate Load Balancer router
-        const API_BASE = "http://amazonaws.com";
+        // 🔴 FIXED AWS INGRESS ALB ROUTER DOMAIN MAPPING
+        const API_BASE = "http://exam-ingress-alb-1972135871.ap-south-1.elb.amazonaws.com";
 
         async function fetchQuestion() {
             try {
